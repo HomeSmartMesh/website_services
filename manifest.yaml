@@ -3,7 +3,7 @@ fetch:
     repository: HomeSmartMesh/website
     ref: main
     path: repos
-    filter: content/*
+    filter: content/**/*
 pipeline:
   process:
     calculate-functions: pipeline.py#calculate
