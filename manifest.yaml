@@ -4,6 +4,7 @@ fetch:
     ref: main
     path: repos
     filter: content/**/*
+    resource: markdown-content
 pipeline:
   process:
     calculate-functions: pipeline.py#calculate

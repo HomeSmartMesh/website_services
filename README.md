@@ -2,11 +2,50 @@
 example usage of containers as services for website building
 
 # Usage
-* start the requried services with docker compose e.g.
+```bash
+cd services
+docker compose up
+```
 
-    docker compose up fetcher
+* test with a publish on the topic `fetcher/request`
 
-* run the required command or call it as a service e.g. using the tester
+```json
+{
+    "fetch_list": [
+        {
+            "type": "github",
+            "repository":   "HomeSmartMesh/raspi",
+            "ref":  "master",
+            "path": "repos",
+            "filter":   "design/*",
+            "resource": "raspi-design"
+        }
+    ]
+}
+```
 
-    test fetch
+* the fetcher publishes on confirmation then on completion and on resources
 
+![Broker](./design/broker.png)
+
+# Concept
+two types of corss services interactions will be used :
+* `slow interaction`
+    * single instance
+    * event based on MQTT
+
+    A slow interaction is an an operation that
+    * can require a long time to process such as more than 30s or minutes or hours.
+    * is only initiated by a single service client
+    * requests do not need to be queued
+    * is needed sporadically or scheduled with jobs which preiod is necessarily bigger if not significantly bigger than the time it takes them to complete
+
+* `fast interaction`
+    * multiple instances of independent clients
+    * http REST API
+
+    A fat interaction is an an operation that
+    * completes necessarily within less any default request timeout config
+    * can be initiated by any number of independent clients
+    * requests need to be queued
+    * is needed very frequently such as converting a high number of files
