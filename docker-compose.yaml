@@ -1,0 +1,8 @@
+services:
+  markdown:
+    build:
+      context: ./markdown
+      dockerfile: Dockerfile
+    volumes:
+      - ../cache/fetch:/cache
+      - ../cache/web:/web
