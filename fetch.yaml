@@ -1,0 +1,7 @@
+- type: github
+  repository: HomeSmartMesh/website
+  ref: main
+  path: repos
+  filter: content/**/*
+  resource: raspi-website
+  action: markdown/render

@@ -13,6 +13,7 @@ def on_message(client, userdata, msg):
             action["function"]()
 
 def start():
+    print(f"connecting to {BROKER}:{PORT}")
     client.connect(BROKER, PORT, 60)
     # Blocking call that processes network traffic, dispatches callbacks and handles reconnecting.
     client.loop_forever()
@@ -30,7 +31,7 @@ def publish(topic, data):
     return
 
 # Constants
-BROKER = 'mosquitto'
+BROKER = 'host.docker.internal'
 PORT = 1883
 CACHE_PATH = "/cache"
 

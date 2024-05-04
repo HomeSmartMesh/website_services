@@ -1,7 +1,7 @@
 services:
   markdown:
     build:
-      context: ./markdown
+      context: .
       dockerfile: Dockerfile
     volumes:
       - ../cache/fetch:/cache

@@ -5,5 +5,5 @@ def test_received():
     mc.publish("markdown/confirmation",{"status":"received"})
     return
 
-mc.add_action("markdown/request",test_received)
+mc.add_action("markdown/render",test_received)
 mc.start()
