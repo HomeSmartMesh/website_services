@@ -4,5 +4,6 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ../cache/fetch:/cache
+      - ../cache/fetch:/fetch
+      - ../cache/process:/process
       - ../cache/web:/web

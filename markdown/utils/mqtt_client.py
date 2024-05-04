@@ -10,7 +10,11 @@ def on_message(client, userdata, msg):
     print(f"Message received on {msg.topic}")
     for action in actions:
         if msg.topic == action["topic"]:
-            action["function"]()
+            try:
+                data = json.loads(msg.payload)
+                action["function"](msg.topic,data)
+            except json.decoder.JSONDecodeError as e:
+                print(f"json.decoder.JSONDecodeError {e}")
 
 def start():
     print(f"connecting to {BROKER}:{PORT}")
