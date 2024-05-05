@@ -1,0 +1,9 @@
+- action: fetcher/fetch
+  type: github
+  repository: HomeSmartMesh/website
+  ref: main
+  filter: content/*
+  resource: home-website
+- action: markdown/build
+  resource: home-website
+  path: /fetch/home-website/content
