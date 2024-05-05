@@ -1,9 +1,9 @@
 - action: fetcher/fetch
   type: github
-  repository: HomeSmartMesh/website
+  repository: MicroWebStacks/astro-big-doc
   ref: main
   filter: content/*
-  resource: home-website
+  resource: test-website
 - action: markdown/build
-  resource: home-website
-  path: /fetch/home-website/content
+  resource: test-website
+  path: /fetch/test-website/content

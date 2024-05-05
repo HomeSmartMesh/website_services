@@ -5,6 +5,8 @@ def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
     for action in actions:
         client.subscribe(action["topic"])
+    if(status_topic != ""):
+        client.publish(status_topic,"up")
 
 def on_message(client, userdata, msg):
     print(f"Message received on {msg.topic}")
@@ -21,6 +23,11 @@ def start():
     client.connect(BROKER, PORT, 60)
     # Blocking call that processes network traffic, dispatches callbacks and handles reconnecting.
     client.loop_forever()
+    return
+
+def set_status_topic(topic):
+    global status_topic
+    status_topic = topic
     return
 
 def add_action(topic,function):
@@ -44,3 +51,4 @@ client.on_connect = on_connect
 client.on_message = on_message
 
 actions = []
+status_topic = ""

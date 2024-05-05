@@ -7,7 +7,7 @@ import state
 
 def markdown_builder(topic,payload):
     print("markdown builder")
-    mc.publish("markdown/confirmation",{"build":payload})
+    mc.publish("markdown/build/start",{"build":payload})
     if("resource" in payload):
         resource = payload["resource"]
         path = payload.get("path")
@@ -34,17 +34,12 @@ def build_website(resource,path):
         subprocess.run("pnpm run build", shell=True, check=True)
         os.chdir(original_dir)
 
-        mc.publish("markdown/completion", resource)
+        mc.publish("markdown/build/finish", resource)
     except Exception as e:
         print(f"unhandled exception {e}")
         mc.publish("markdown/error", {"error": str(e)})
         return
 
-def update_resource(topic,payload):
-    id = topic.split("/")[2]
-    state.resources[id] = payload
-    return
-
 mc.add_action("markdown/build",markdown_builder)
-mc.add_action("fetcher/resources/#",update_resource)
+mc.set_status_topic("markdown/status")
 mc.start()

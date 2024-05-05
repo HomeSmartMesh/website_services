@@ -14,14 +14,12 @@ then publish on `fetcher/fetch`
 ```json
 [
     {
+        "action":       "fetcher/fetch",
         "type":         "github",
         "repository":   "HomeSmartMesh/website",
         "ref":          "main",
         "filter":       "content/3dprinting/*",
-        "resource":     "markdown-content",
-        "action":       "markdown/build"
+        "resource":     "markdown-content"
     }
 ]
 ```
-
-on completion `markdown/build` will be triggered which will build the markdown website
