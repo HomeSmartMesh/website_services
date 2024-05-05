@@ -6,20 +6,23 @@ Copper pipeline for markdown website building
 run both docker compsoe files from the root and from the `./copper` submodule
 
 ```shell
-docker compose -f docker-compose.yaml -f copper/docker-compose.yaml up -d
+cd copper
+docker compose up -d
+cd ..
+cd markdown
+docker compose up -d
 ```
 
-then publish on `fetcher/fetch`
+the root `workflow.yaml` will be executed by the runner that pulishes each action topics and subscribes to wait for the action to finish
 
-```json
-[
-    {
-        "action":       "fetcher/fetch",
-        "type":         "github",
-        "repository":   "HomeSmartMesh/website",
-        "ref":          "main",
-        "filter":       "content/3dprinting/*",
-        "resource":     "markdown-content"
-    }
-]
+```yaml
+- action: fetcher/fetch
+  type: github
+  repository: MicroWebStacks/astro-big-doc
+  ref: main
+  filter: content/*
+  resource: test-website
+- action: markdown/build
+  resource: test-website
+  path: /fetch/test-website/content
 ```
