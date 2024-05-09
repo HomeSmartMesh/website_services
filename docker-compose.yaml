@@ -1,0 +1,25 @@
+services:
+  mosquitto:
+    build: ./copper/mosquitto
+    ports:
+      - 1883:1883
+    volumes:
+      - ./cache/log/mosquitto:/mosquitto/log
+  fetcher:
+    build: ./copper/fetcher
+    volumes:
+      - ./cache/fetch:/fetch
+    depends_on:
+      - mosquitto
+  runner:
+    build: ./copper/runner
+    volumes:
+      - ./workflow.yaml:/app/workflow.yaml
+    depends_on:
+      - fetcher
+  markdown:
+    build: ./services/markdown
+    volumes:
+      - ./cache/fetch:/fetch
+      - ./cache/process:/process
+      - ./cache/web:/web
