@@ -1,3 +1,6 @@
 [submodule "copper"]
 	path = copper
 	url = git@github.com:MicroWebStacks/copper.git
+[submodule "services"]
+	path = services
+	url = git@github.com:MicroWebStacks/applications-services.git
