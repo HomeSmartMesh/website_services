@@ -23,3 +23,13 @@ services:
       - ./cache/fetch:/fetch
       - ./cache/process:/process
       - ./cache/web:/web
+  typesense:
+    image: typesense/typesense:26.0
+    restart: on-failure
+    ports:
+      - 8108:8108
+    volumes:
+      - ./cache/data/typesense:/data
+    environment:
+      - TYPESENSE_API_KEY=${TYPESENSE_API_KEY}
+    command: '--data-dir /data --enable-cors'
