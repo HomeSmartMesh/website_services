@@ -26,3 +26,8 @@ the root `workflow.yaml` will be executed by the runner that pulishes each actio
   resource: test-website
   path: /fetch/test-website/content
 ```
+
+certificate creation in git bash
+```bash
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./certs/localhost.key -out ./certs/localhost.crt -subj "//CN=localhost"
+```
