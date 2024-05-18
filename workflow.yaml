@@ -7,3 +7,11 @@
 - action: markdown/build
   resource: test-website
   path: /fetch/test-website/content
+- action: search/collect
+  resource: test-website
+- action: llm/collect
+  resource: test-website
+- action: llm/embed
+  resource: test-website
+- action: search/inject
+  resource: test-website
