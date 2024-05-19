@@ -1,3 +1,6 @@
+# Archived
+development will continue in https://github.com/MicroWebStacks/markdown-rag-services
+
 # website_services
 Copper pipeline for markdown website building
 
